@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>НОЖЕЯР</title>
+  <link type="image" rel="icon" href="../../static/img/logo.png">
+</head>
+<body style="background: linear-gradient(0.25turn, #9ad96a, #ebf8e1, #ff7538)">
+<a style="padding:20px" class="label" href="/admin">Назад</a>
+<h3>Список пользователей</h3>
+
+<div th:each="element : ${person}">
+  <ol>
+    <a aria-current="page" th:href="@{/admin/person/info/{id}(id=${element.getId()})}" th:text="${element.getLogin()}"></a>
+  </ol>
+</div>
+</body>
+</html>

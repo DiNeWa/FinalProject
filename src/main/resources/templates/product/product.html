@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>НОЖЕЯР</title>
+    <link type="img" rel="icon" href="../../static/img/logo.png">
+</head>
+<body style="background: linear-gradient(0.25turn, #9ad96a, #ebf8e1, #ff7538)">
+<a style="padding:20px" class="label" href="/auth/login">Авторизоваться</a>
+<form th:method="POST" th:action="@{/product/search}" style="margin: 0 auto">
+    <fieldset>
+        <legend><h3>Выберите параметры для сортировки, поиска, фильтрации</h3></legend>
+        <br>
+        <label for="search">Поиск по наименованию</label>
+        <input type="search" name="search" th:value="*{value_search}" id="search">
+        <br>
+        <p>Цена, ₽</p>
+        <label for="ot">От</label>
+        <input type="text" name="ot" th:value="*{value_price_ot}" id="ot">
+        <label for="do">До</label>
+        <input type="text" name="do" th:value="*{value_price_do}" id="do">
+        <br>
+        <br>
+        <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
+        <label for="ascending_price">Отсортировать по возрастанию цены</label>
+        <br>
+        <br>
+        <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
+        <label for="descending_price">Отсортировать по убыванию цены</label>
+        <p>Категория товаров: </p>
+        <input type="radio" id="knife" name="category" value="knife">
+        <label for="knife">Ножи</label>
+        <input type="radio" id="axe" name="category" value="axe">
+        <label for="axe">Топоры</label>
+        <input type="radio" id="voodoo" name="category" value="voodoo">
+        <label for="voodoo">Куклы Вуду</label>
+        <br>
+        <br>
+        <input type="submit" value="Найти">
+    </fieldset>
+</form>
+<br>
+<fieldset>
+    <legend><h3>Результат: </h3></legend>
+
+    <div th:each="product : ${search_product}"
+         style="float: left; margin: 3px; padding: 10px; border-radius: 5px; border: solid 1px; width: 230px; height: 350px">
+        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
+        <div>
+            <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+            <p class="price" th:text="'Цена: ' + ${product.getPrice()}"></p>
+        </div>
+    </div>
+</fieldset>
+<br>
+<fieldset>
+    <legend style="display: flex; justify-content: center"><h3>Доступные товары: </h3></legend>
+    <br>
+    <div>
+        <div>
+            <div th:each="product : ${products}"
+                 style="float: left; margin: 3px; padding: 10px; border-radius: 5px; border: solid 1px; height: 350px">
+                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
+                <div class="card-body">
+                    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"
+                       id="title"></a>
+                    <p class="price" th:text="'Цена: ' + ${product.getPrice()}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+</body>
+</html>

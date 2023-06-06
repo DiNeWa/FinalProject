@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>НОЖЕЯР</title>
+    <link type="img" rel="icon" href="../../static/img/logo.png">
+</head>
+<body  style="background: linear-gradient(0.25turn, #9ad96a, #ebf8e1, #ff7538)">
+<a style="padding:20px" class="label" href="/auth/login">Назад</a>
+<a style="padding:20px" class="label" href="index.html">Просмотр товаров</a>
+<p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+<p th:text="'Описание: ' + ${product.getDescription()}"></p>
+<p th:text="'Цена: ' + ${product.getPrice()}"></p>
+<p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+<p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+<p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+
+<div th:each="img : ${product.getImageList()}">
+    <img th:src="'/img/' + ${img.getFileName()}" width="200px" style="margin: 10px">
+</div>
+</body>
+</html>

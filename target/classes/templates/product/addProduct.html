@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>НОЖЕЯР</title>
+    <link type="img" rel="icon" href="../../static/img/logo.png">
+</head>
+<a style="padding:20px" class="label" href="/admin">Назад</a>
+<body class="body" style="background: linear-gradient(0.25turn, #9ad96a, #ebf8e1, #ff7538)">
+<h3>Добавление товара</h3>
+
+<form th:method="POST" th:action="@{/admin/product/add}" th:object="${product}" enctype="multipart/form-data">
+<div class="mb-3" style="width:500px;">
+    <label for="title" class="form-label" >Введите наименование: </label>
+    <input type="text" class="form-control" th:field="*{title}" placeholder="Наименование" id="title">
+    <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+</div>
+
+<div class="mb-3" style="width:500px">
+    <label class="form-label" for="description">Введите описание: </label>
+   <textarea class="form-control" th:field="*{description}" placeholder="Описание" id="description"></textarea>
+   <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+   <br>
+</div>
+    <div class="mb-3" style="width:500px">
+            <label for="price" class="form-label">Введите цену: </label>
+            <input type="number" class="form-control" th:field="*{price}" min="1" step="0.00" id="price">
+            <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+<!--            <br>-->
+<!--        <br>-->
+    </div>
+
+    <div class="mb-3" style="width:500px">
+        <label for="warehouse">Введите информацию о складе: </label>
+        <input type="text" class="form-control" th:field="*{warehouse}" placeholder="Склад" id="warehouse">
+        <div style="color: red" th:if="${#fields.hasErrors('warehouse')}" th:errors="*{warehouse}"></div>
+<!--        <br>-->
+    </div>
+
+    <label for="category">Выберите категорию товара: </label>
+    <select name="category" th:field="*{category}" id="category">
+        <div th:each="element : ${category}">
+            <option th:text="${element.getName()}" th:value="${element.getId()}"></option>
+        </div>
+    </select>
+<!--    <br>-->
+<!--    <br>-->
+<div style="margin: 30px">
+    <label for="seller">Введите данные о продавце: </label>
+    <textarea th:field="*{seller}" placeholder="Продавец" id="seller"></textarea>
+    <div style="color: red" th:if="${#fields.hasErrors('seller')}" th:errors="*{seller}"></div>
+</div>
+
+<!--    <br>-->
+<!--    <br>-->
+    <p>Вы можете добавить до 5 фотографий. Первая фотография не может быть пустой</p>
+    <input style="color: darkgreen" type="file" name="file_one">
+    <input style="color: darkgreen" type="file" name="file_two">
+    <input style="color: darkgreen" type="file" name="file_three">
+    <input style="color: darkgreen" type="file" name="file_four">
+    <input style="color: darkgreen" type="file" name="file_five">
+    <input type="submit" value="Добавить">
+</form>
+
+</body>
+</html>

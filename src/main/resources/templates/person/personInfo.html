@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>НОЖЕЯР</title>
+  <link type="img" rel="icon" href="../../static/img/logo.png">
+</head>
+<body style="background: linear-gradient(0.25turn, #9ad96a, #ebf8e1, #ff7538)">
+<a style="padding:20px" class="label" href="/admin">Назад</a>
+<h3>Информация о пользователе</h3>
+<p th:text="'Логин: ' + ${person.getLogin()}"/>
+<p th:text="'Пароль: ' + ${person.getPassword()}"/>
+<p th:text="'Роль: ' + ${person.getRole()}"/>
+
+<a th:href="@{/admin/person/edit/{id}(id=${person.getId()})}">Редактировать пользователя</a>
+<a th:href="@{/admin/person/delete/{id}(id=${person.getId()})}">Удалить пользователя</a>
+
+</body>
+</html>

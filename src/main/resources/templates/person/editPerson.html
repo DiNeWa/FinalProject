@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>НОЖЕЯР</title>
+  <link type="img" rel="icon" href="../../static/img/logo.png">
+</head>
+<body style="background: linear-gradient(0.25turn, #9ad96a, #ebf8e1, #ff7538)">
+<a style="padding:20px" class="label" href="/admin">Назад</a>
+<h3>Редактирование пользователей</h3>
+<form method="POST" th:action="@{/admin/person/edit/{id}(id=${editPerson.getId()})}" th:object="${editPerson}">
+
+  <div class="mb-3" style="width:500px">
+
+<tr>
+  <label for="login" class="form-label" >Введите логин: </label>
+  <input type="text" class="form-control" th:field="*{login}" id="login">
+  <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+  <br>
+
+  <label for="password" class="form-label">Введите пароль: </label>
+  <input type="text" class="form-control" th:field="*{password}" id="password">
+  <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+  <br>
+
+  <label for="role" class="form-label">Введите роль: </label>
+
+  <input type="text" class="form-control" th:field="*{role}" id="role">
+  <div style="color: red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>
+  <br>
+
+  </div>
+
+  <input type="submit" value="Редактировать">
+  <br>
+</form>
+<a class="link" href="/auth/password/change" type="submit" value="Изменить пароль">Изменить пароль</a>
+</body>
+</html>
